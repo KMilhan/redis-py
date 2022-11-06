@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Awaitable, Optional, Union
 from redis.exceptions import LockError, LockNotOwnedError
 
 if TYPE_CHECKING:
-    from redis.asyncio import Redis
+    from redis.asyncio import Redis, RedisCluster
 
 
 class Lock:
@@ -77,7 +77,7 @@ class Lock:
 
     def __init__(
         self,
-        redis: "Redis",
+        redis: Union["Redis", "RedisCluster"],
         name: Union[str, bytes, memoryview],
         timeout: Optional[float] = None,
         sleep: float = 0.1,
